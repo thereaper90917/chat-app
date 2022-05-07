@@ -1,10 +1,10 @@
 <script>
   import io from 'socket.io-client'
-	const socket = io("http://localhost:8001")
+	const socket = io("http://45.41.204.198:8070/")
   let user = ''
   let id = ''
   async function doPost(){
-    const res = await fetch('http://localhost:8001/v1/users',{
+    const res = await fetch('http://45.41.204.198:8070/v1/users',{
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

@@ -5469,7 +5469,7 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[2] = list[i];
+    	child_ctx[1] = list[i];
     	return child_ctx;
     }
 
@@ -5477,33 +5477,30 @@ var app = (function () {
     function create_else_block(ctx) {
     	let div1;
     	let div0;
-    	let t0;
     	let t1;
-    	let t2_value = /*message*/ ctx[2] + "";
+    	let t2_value = /*message*/ ctx[1] + "";
     	let t2;
 
     	const block = {
     		c: function create() {
     			div1 = element("div");
     			div0 = element("div");
-    			t0 = text(/*userName*/ ctx[1]);
+    			div0.textContent = `${/*userName*/ ctx[3]}`;
     			t1 = space();
     			t2 = text(t2_value);
     			attr_dev(div0, "class", "font-weight-bold mb-1");
-    			add_location(div0, file$3, 125, 8, 3637);
+    			add_location(div0, file$3, 125, 8, 3645);
     			attr_dev(div1, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
-    			add_location(div1, file$3, 124, 6, 3568);
+    			add_location(div1, file$3, 124, 6, 3576);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
     			append_dev(div1, div0);
-    			append_dev(div0, t0);
     			append_dev(div1, t1);
     			append_dev(div1, t2);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*userName*/ 2) set_data_dev(t0, /*userName*/ ctx[1]);
-    			if (dirty & /*messages*/ 1 && t2_value !== (t2_value = /*message*/ ctx[2] + "")) set_data_dev(t2, t2_value);
+    			if (dirty & /*messages*/ 1 && t2_value !== (t2_value = /*message*/ ctx[1] + "")) set_data_dev(t2, t2_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div1);
@@ -5531,20 +5528,20 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			img = element("img");
-    			if (!src_url_equal(img.src, img_src_value = /*message*/ ctx[2].replace(`${/*userName*/ ctx[1]}:`, ""))) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*message*/ ctx[1].replace(`${/*userName*/ ctx[3]}:`, ""))) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "width", "300px");
     			attr_dev(img, "height", "200px");
-    			add_location(img, file$3, 121, 8, 3447);
+    			add_location(img, file$3, 121, 8, 3455);
     			attr_dev(div, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
-    			add_location(div, file$3, 120, 6, 3378);
+    			add_location(div, file$3, 120, 6, 3386);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, img);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*messages, userName*/ 3 && !src_url_equal(img.src, img_src_value = /*message*/ ctx[2].replace(`${/*userName*/ ctx[1]}:`, ""))) {
+    			if (dirty & /*messages*/ 1 && !src_url_equal(img.src, img_src_value = /*message*/ ctx[1].replace(`${/*userName*/ ctx[3]}:`, ""))) {
     				attr_dev(img, "src", img_src_value);
     			}
     		},
@@ -5578,7 +5575,7 @@ var app = (function () {
 
     	function select_block_type(ctx, dirty) {
     		if (dirty & /*messages*/ 1) show_if = null;
-    		if (show_if == null) show_if = !!/*message*/ ctx[2].includes('https://');
+    		if (show_if == null) show_if = !!/*message*/ ctx[1].includes('https://');
     		if (show_if) return create_if_block;
     		return create_else_block;
     	}
@@ -5593,7 +5590,7 @@ var app = (function () {
     			img = element("img");
     			t0 = space();
     			div0 = element("div");
-    			div0.textContent = `${/*current*/ ctx[3].toLocaleTimeString()}`;
+    			div0.textContent = `${/*current*/ ctx[2].toLocaleTimeString()}`;
     			t2 = space();
     			if_block.c();
     			t3 = space();
@@ -5602,12 +5599,12 @@ var app = (function () {
     			attr_dev(img, "alt", "Sharon Lessman");
     			attr_dev(img, "width", "40");
     			attr_dev(img, "height", "40");
-    			add_location(img, file$3, 107, 8, 2993);
+    			add_location(img, file$3, 107, 8, 3001);
     			attr_dev(div0, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div0, file$3, 114, 8, 3203);
-    			add_location(div1, file$3, 106, 6, 2978);
+    			add_location(div0, file$3, 114, 8, 3211);
+    			add_location(div1, file$3, 106, 6, 2986);
     			attr_dev(div2, "class", "chat-message-left pb-4");
-    			add_location(div2, file$3, 105, 5, 2934);
+    			add_location(div2, file$3, 105, 5, 2942);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -5716,35 +5713,35 @@ var app = (function () {
     			attr_dev(img, "alt", "Sharon Lessman");
     			attr_dev(img, "width", "40");
     			attr_dev(img, "height", "40");
-    			add_location(img, file$3, 40, 8, 924);
+    			add_location(img, file$3, 40, 8, 932);
     			attr_dev(div0, "class", "position-relative");
-    			add_location(div0, file$3, 39, 6, 883);
-    			add_location(strong, file$3, 49, 8, 1186);
-    			add_location(em, file$3, 50, 38, 1255);
+    			add_location(div0, file$3, 39, 6, 891);
+    			add_location(strong, file$3, 49, 8, 1194);
+    			add_location(em, file$3, 50, 38, 1263);
     			attr_dev(div1, "class", "text-muted small");
-    			add_location(div1, file$3, 50, 8, 1225);
+    			add_location(div1, file$3, 50, 8, 1233);
     			attr_dev(div2, "class", "flex-grow-1 pl-3");
-    			add_location(div2, file$3, 48, 6, 1146);
+    			add_location(div2, file$3, 48, 6, 1154);
     			attr_dev(div3, "class", "d-flex align-items-center py-1");
-    			add_location(div3, file$3, 38, 4, 831);
+    			add_location(div3, file$3, 38, 4, 839);
     			attr_dev(div4, "class", "py-2 px-4 border-bottom d-none d-lg-block");
-    			add_location(div4, file$3, 37, 2, 770);
+    			add_location(div4, file$3, 37, 2, 778);
     			attr_dev(div5, "class", "chat-messages p-4");
-    			add_location(div5, file$3, 103, 4, 2861);
+    			add_location(div5, file$3, 103, 4, 2869);
     			attr_dev(div6, "class", "position-relative");
-    			add_location(div6, file$3, 102, 2, 2824);
+    			add_location(div6, file$3, 102, 2, 2832);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "form-control");
     			attr_dev(input, "placeholder", "Type your message");
-    			add_location(input, file$3, 136, 6, 3871);
+    			add_location(input, file$3, 136, 6, 3879);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$3, 143, 6, 4049);
+    			add_location(button, file$3, 143, 6, 4057);
     			attr_dev(div7, "class", "input-group");
-    			add_location(div7, file$3, 135, 4, 3838);
+    			add_location(div7, file$3, 135, 4, 3846);
     			attr_dev(div8, "class", "flex-grow-0 py-3 px-4 border-top");
-    			add_location(div8, file$3, 134, 2, 3786);
+    			add_location(div8, file$3, 134, 2, 3794);
     			attr_dev(div9, "class", "col-12 col-lg-7 col-xl-9");
-    			add_location(div9, file$3, 36, 0, 728);
+    			add_location(div9, file$3, 36, 0, 736);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5773,7 +5770,7 @@ var app = (function () {
     			append_dev(div9, div8);
     			append_dev(div8, div7);
     			append_dev(div7, input);
-    			set_input_value(input, /*message*/ ctx[2]);
+    			set_input_value(input, /*message*/ ctx[1]);
     			append_dev(div7, t6);
     			append_dev(div7, button);
 
@@ -5788,7 +5785,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*messages, userName, current*/ 11) {
+    			if (dirty & /*messages, userName, current*/ 13) {
     				each_value = /*messages*/ ctx[0];
     				validate_each_argument(each_value);
     				let i;
@@ -5812,8 +5809,8 @@ var app = (function () {
     				each_blocks.length = each_value.length;
     			}
 
-    			if (dirty & /*message*/ 4 && input.value !== /*message*/ ctx[2]) {
-    				set_input_value(input, /*message*/ ctx[2]);
+    			if (dirty & /*message*/ 2 && input.value !== /*message*/ ctx[1]) {
+    				set_input_value(input, /*message*/ ctx[1]);
     			}
     		},
     		i: noop,
@@ -5840,7 +5837,7 @@ var app = (function () {
     function instance$3($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Chat', slots, []);
-    	const socket = lookup("http://localhost:8001");
+    	const socket = lookup("http://45.41.204.198:8070/");
     	let current = new Date();
     	let messages = [];
     	let message = '';
@@ -5848,13 +5845,13 @@ var app = (function () {
 
     	socket.on('chat message', (user, msg) => {
     		$$invalidate(0, messages = [...messages, `${user[0].name}: \n ${msg}`]);
-    		$$invalidate(1, userName = user[0].name);
     	}); // userName = user[0].name
+    	// userName = user[0].name
     	// console.log(user)
 
     	function sendMessage() {
     		socket.emit('chat message', message);
-    		$$invalidate(2, message = '');
+    		$$invalidate(1, message = '');
     		const chatMessages = document.querySelector('.chat-messages');
     		chatMessages.scrollTop = chatMessages.scrollHeight;
     	}
@@ -5873,7 +5870,7 @@ var app = (function () {
 
     	function input_input_handler() {
     		message = this.value;
-    		$$invalidate(2, message);
+    		$$invalidate(1, message);
     	}
 
     	$$self.$capture_state = () => ({
@@ -5888,17 +5885,17 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('current' in $$props) $$invalidate(3, current = $$props.current);
+    		if ('current' in $$props) $$invalidate(2, current = $$props.current);
     		if ('messages' in $$props) $$invalidate(0, messages = $$props.messages);
-    		if ('message' in $$props) $$invalidate(2, message = $$props.message);
-    		if ('userName' in $$props) $$invalidate(1, userName = $$props.userName);
+    		if ('message' in $$props) $$invalidate(1, message = $$props.message);
+    		if ('userName' in $$props) $$invalidate(3, userName = $$props.userName);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [messages, userName, message, current, sendMessage, submit, input_input_handler];
+    	return [messages, message, current, userName, sendMessage, submit, input_input_handler];
     }
 
     class Chat extends SvelteComponentDev {
@@ -6053,33 +6050,33 @@ var app = (function () {
     			attr_dev(img, "class", "img-fluid profile-image-pic img-thumbnail rounded-circle my-3 svelte-1di2fv1");
     			attr_dev(img, "width", "200px");
     			attr_dev(img, "alt", "profile");
-    			add_location(img, file$1, 26, 14, 757);
+    			add_location(img, file$1, 26, 14, 766);
     			attr_dev(div0, "class", "text-center");
-    			add_location(div0, file$1, 25, 12, 716);
+    			add_location(div0, file$1, 25, 12, 725);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "form-control");
     			attr_dev(input, "id", "Username");
     			attr_dev(input, "aria-describedby", "emailHelp");
     			attr_dev(input, "placeholder", "User Name");
-    			add_location(input, file$1, 34, 14, 1090);
+    			add_location(input, file$1, 34, 14, 1099);
     			attr_dev(div1, "class", "mb-3");
-    			add_location(div1, file$1, 33, 12, 1056);
+    			add_location(div1, file$1, 33, 12, 1065);
     			attr_dev(button, "type", "submit");
     			attr_dev(button, "class", "btn btn-color px-5 mb-5 w-100 svelte-1di2fv1");
-    			add_location(button, file$1, 52, 14, 1652);
+    			add_location(button, file$1, 52, 14, 1661);
     			attr_dev(div2, "class", "text-center");
-    			add_location(div2, file$1, 51, 12, 1611);
+    			add_location(div2, file$1, 51, 12, 1620);
     			attr_dev(form, "class", "card-body cardbody-color p-lg-5 svelte-1di2fv1");
     			attr_dev(form, "action", "#/chat");
-    			add_location(form, file$1, 24, 10, 640);
+    			add_location(form, file$1, 24, 10, 649);
     			attr_dev(div3, "class", "card my-5");
-    			add_location(div3, file$1, 23, 8, 605);
+    			add_location(div3, file$1, 23, 8, 614);
     			attr_dev(div4, "class", "col-md-6 offset-md-3");
-    			add_location(div4, file$1, 21, 6, 488);
+    			add_location(div4, file$1, 21, 6, 497);
     			attr_dev(div5, "class", "row");
-    			add_location(div5, file$1, 20, 4, 463);
+    			add_location(div5, file$1, 20, 4, 472);
     			attr_dev(div6, "class", "container");
-    			add_location(div6, file$1, 19, 0, 434);
+    			add_location(div6, file$1, 19, 0, 443);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -6137,12 +6134,12 @@ var app = (function () {
     function instance$1($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Login', slots, []);
-    	const socket = lookup("http://localhost:8001");
+    	const socket = lookup("http://45.41.204.198:8070/");
     	let user = '';
     	let id = '';
 
     	async function doPost() {
-    		await fetch('http://localhost:8001/v1/users', {
+    		await fetch('http://45.41.204.198:8070/v1/users', {
     			method: 'POST',
     			headers: { "Content-Type": "application/json" },
     			body: JSON.stringify({ user, "socketId": id })

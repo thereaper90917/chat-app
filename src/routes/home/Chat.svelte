@@ -1,7 +1,7 @@
 
 <script>
   import io from 'socket.io-client'
-	const socket = io("http://localhost:8001")
+	const socket = io("http://45.41.204.198:8070/")
 
 
   
@@ -12,7 +12,7 @@
   socket.on('chat message', (user,msg) => {
     
     messages = [...messages, `${user[0].name}: \n ${msg}`]
-    userName = user[0].name
+    // userName = user[0].name
 
     // userName = user[0].name
     // console.log(user)

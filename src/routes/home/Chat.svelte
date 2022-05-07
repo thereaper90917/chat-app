@@ -2,13 +2,16 @@
   import io from "socket.io-client";
   import Gifs from './Gifs.svelte'
   import { preferences } from "../../stores/users";
+  import EmojiPicker from 'svelte-emoji-picker';
 
   const socket = io("http://45.41.204.198:8070/");
-
+  let showEmoji = false
+  let showGifs = false
   let current = new Date();
   let messages = [];
   let message = "";
   let userName = $preferences.user.name;
+  
   socket.on("chat message", (user, msg) => {
     messages = [...messages, msg];
     // userName = user[0].name
@@ -45,6 +48,16 @@
     if (event.key === "Enter") {
       sendMessage();
     }
+  }
+
+  function showEmojis (){
+    showEmoji = true
+  }
+  function showGifss(){
+    showGifs = true
+  }
+  function hideEmojis (){
+    showEmoji = false
   }
 </script>
 
@@ -114,7 +127,14 @@
         bind:value={message}
       />
       <button class="btn btn-primary" on:click={sendMessage}>Send</button>
+      <button class="btn btn-primary" on:click={showGifss}>Gifs</button>
+      <button class="btn btn-primary" on:click={showEmojis}>Emoji</button>
     </div>
-    <Gifs/>
+    <Gifs showGifs = {showGifs}/>
+    {#if showEmoji}
+    <EmojiPicker bind:value={message} />
+    <button class="btn btn-primary" on:click={hideEmojis}>Close</button>
+    {/if}
+    
   </div>
 </div>

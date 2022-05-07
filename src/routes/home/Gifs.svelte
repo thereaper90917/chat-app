@@ -6,12 +6,12 @@
     let API = 'Imh2ewK2KA4nS0yB9OE67jFmMX5wrVjn'
 
     let gifs = []
+    export let showGifs
     let userName = $preferences.user.name;
     function sendGif(data){
         sendMessage(data)
     }
     function sendMessage(gif) {
-   
    const sendMessage = {
      text: gif,
      user: {
@@ -36,7 +36,12 @@
         result.data.forEach((gif) => gifs.push(gif.images.downsized.url));
     }
     let promise = getGifs()
+
+    function closeGifs(){
+      showGifs = false
+    }
 </script>
+{#if showGifs}
 {#await promise}
     
 {:then} 
@@ -45,5 +50,8 @@
 
 {/each}
 <p class="mt-1">Gifs Powered By GIPHY</p>
+<button class="btn btn-primary" on:click={closeGifs}>Close</button>
 {/await}
+{/if}
+
 

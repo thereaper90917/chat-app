@@ -39,10 +39,18 @@
         inlcuded: false,
         url: "",
       },
+      youtube:{
+        inlcuded: false,
+        url: "",
+      }
     };
-    if(sendMessage.text.includes('https://')){
+    if(sendMessage.text.includes('https://media0.giphy.com')){
       sendMessage.gif.included = true
       sendMessage.gif.url = message
+    }
+    if(sendMessage.text.includes('https://www.youtube.com/')){
+      sendMessage.youtube.included = true
+      sendMessage.youtube.url = message.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/")
     }
     socket.emit("chat message", sendMessage);
     message = "";
@@ -114,6 +122,9 @@
                   width="300px"
                   height="200px"
                 />
+                {:else if message.youtube.included}
+                <iframe title="Youtube Video" width="420" height="345" src="{message.youtube.url}">
+                </iframe>
               {:else}
                 {message.text}
               {/if}

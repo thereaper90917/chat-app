@@ -31,17 +31,32 @@ app.post("/v1/users", async (req, res) => {
 
 // socket IO
 let username = "";
+let allUsers = [];
+let tempUser;
 io.on("connection", async (socket) => {
+  socket.on("users", (users) => {
+    allUsers = [...allUsers, users];
+    tempUser = users;
+    io.emit("addUsers", allUsers);
+    socket.on("disconnect", () => {
+      let index = allUsers.indexOf(tempUser);
+      if (index !== -1) {
+        allUsers.splice(index, 1);
+      }
+      // let result = allUsers.filter((item) => item === users);
+      // allUsers = result;
+      io.emit("addUsers", allUsers);
+    });
+  });
+
   await db.insertAsync({
     name: username,
     socketId: socket.id,
   });
   socket.on("chat message", async (msg) => {
     // let user = await db.findAsync({ socketId: socket.id });
-    console.log(socket.id);
 
     let user = await db.findAsync({ socketId: socket.id });
-    console.log(user);
     io.emit("chat message", user, msg);
   });
 

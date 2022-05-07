@@ -1,47 +1,51 @@
 <script>
-  import io from 'socket.io-client'
-	const socket = io("http://localhost:8001")
-  let user = ''
-  let id = ''
-  async function doPost(){
-    const res = await fetch('http://localhost:8001/v1/users',{
-      method: 'POST',
+  import io from "socket.io-client";
+  import { pop } from "svelte-spa-router";
+  import { preferences } from "../../stores/users";
+
+  const socket = io("http://localhost:8001/");
+  let user = "";
+  let id = "";
+  async function doPost() {
+    const res = await fetch("http://localhost:8001/v1/users", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({"user":user, "socketId":id})
-    })
-    socket.emit('socketId',user)
-  }
+      body: JSON.stringify({ user: user, socketId: id }),
+    });
+    socket.emit("socketId", user);
 
+    preferences.update(obj => obj = user)
+    pop();
+  }
 </script>
 
-
 <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <!-- <h2 class="text-center text-dark mt-5">Login Form</h2> -->
-        <div class="card my-5">
-          <form class="card-body cardbody-color p-lg-5" action="#/chat">
-            <div class="text-center">
-              <img
-                src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
-                class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
-                width="200px"
-                alt="profile"
-              />
-            </div>
-            <div class="mb-3">
-              <input
-              bind:value="{user}"
-                type="text"
-                class="form-control"
-                id="Username"
-                aria-describedby="emailHelp"
-                placeholder="User Name"
-              />
-            </div>
-            <!-- <div class="mb-3">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <!-- <h2 class="text-center text-dark mt-5">Login Form</h2> -->
+      <div class="card my-5">
+        <form class="card-body cardbody-color p-lg-5" action="#/chat">
+          <div class="text-center">
+            <img
+              src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+              class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+              width="200px"
+              alt="profile"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              bind:value={user}
+              type="text"
+              class="form-control"
+              id="Username"
+              aria-describedby="emailHelp"
+              placeholder="User Name"
+            />
+          </div>
+          <!-- <div class="mb-3">
               <input
                 type="password"
                 class="form-control"
@@ -49,33 +53,38 @@
                 placeholder="password"
               />
             </div> -->
-            <div class="text-center">
-              <button type="submit" class="btn btn-color px-5 mb-5 w-100" on:click="{doPost}">
-                Login
-              </button>
-            </div>
-            <!-- <div id="emailHelp" class="form-text text-center mb-5 text-dark">
+          <div class="text-center">
+            <button
+              type="submit"
+              class="btn btn-color px-5 mb-5 w-100"
+              on:click={doPost}
+            >
+              Login
+            </button>
+          </div>
+          <!-- <div id="emailHelp" class="form-text text-center mb-5 text-dark">
               Not Registered?
               <a href="#" class="text-dark fw-bold"> Create an Account</a>
             </div> -->
-          </form>
-        </div>
+        </form>
       </div>
     </div>
   </div>
-  <style>
-    .btn-color {
-      background-color: #0e1c36;
-      color: #fff;
-    }
+</div>
 
-    .profile-image-pic {
-      height: 200px;
-      width: 200px;
-      object-fit: cover;
-    }
+<style>
+  .btn-color {
+    background-color: #0e1c36;
+    color: #fff;
+  }
 
-    .cardbody-color {
-      background-color: #23272a;
-    }
-  </style>
+  .profile-image-pic {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+  }
+
+  .cardbody-color {
+    background-color: #23272a;
+  }
+</style>

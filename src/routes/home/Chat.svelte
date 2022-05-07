@@ -1,16 +1,16 @@
 
 <script>
   import io from 'socket.io-client'
-	const socket = io("http://localhost:8001")
+	const socket = io("http://localhost:8001/")
 
 
-  
+
   let current = new Date()
   let messages = []
   let message = ''
   let userName = ''
   socket.on('chat message', (user,msg) => {
-    
+
     messages = [...messages, `${user[0].name}: \n ${msg}`]
     userName = user[0].name
 
@@ -23,14 +23,14 @@
     message = ''
     const chatMessages = document.querySelector('.chat-messages')
     chatMessages.scrollTop = chatMessages.scrollHeight
-    
+
   }
 
   function submit(event) {
   if (event.key === 'Enter') {
     sendMessage()
   }
-  
+
 }
 </script>
 
@@ -56,7 +56,7 @@
     <div class="chat-messages p-4">
       {#if gifs }
       {#each gifs as gif}
-         <div class="chat-message-left pb-4"> 
+         <div class="chat-message-left pb-4">
           <div>
             <img
               src="https://bootdey.com/img/Content/avatar/avatar3.png"
@@ -77,7 +77,7 @@
       {/if}
       {#if !gifsYes }
       {#each messages as message }
-      <div class="chat-message-left pb-4"> 
+      <div class="chat-message-left pb-4">
         <div>
           <img
             src="https://bootdey.com/img/Content/avatar/avatar3.png"
@@ -97,7 +97,7 @@
       </div>
       {/each}
       {/if}
-     
+
     </div>
   </div> -->
   <div class="position-relative">
@@ -116,7 +116,7 @@
           {current.toLocaleTimeString()}
         </div>
       </div>
-    
+
       {#if message.includes('https://')}
       <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
         <img src="{message.replace(`${userName}:`,"")}" alt="" width="300px" height="200px">
@@ -139,7 +139,7 @@
         type="text"
         class="form-control"
         placeholder="Type your message"
-        bind:value={message} 
+        bind:value={message}
       />
       <button class="btn btn-primary" on:click={sendMessage}>Send</button>
     </div>

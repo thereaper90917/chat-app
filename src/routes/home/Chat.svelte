@@ -13,6 +13,10 @@
   let userName = $preferences.user.name;
   
   socket.on("chat message", (user, msg) => {
+
+    if(msg.text === ''){
+      return
+    }
     messages = [...messages, msg];
     // userName = user[0].name
 

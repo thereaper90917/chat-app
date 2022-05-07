@@ -1,22 +1,25 @@
 <script>
-  import { pop } from "svelte-spa-router";
+  import { push } from "svelte-spa-router";
   import { preferences } from "../../stores/users";
-  import io from 'socket.io-client'
-	const socket = io("http://45.41.204.198:8070/")
-  let user = ''
-  let id = ''
-  async function doPost(){
-    const res = await fetch('http://45.41.204.198:8070/v1/users',{
-      method: 'POST',
+
+  import io from "socket.io-client";
+  const socket = io("http://45.41.204.198:8070/");
+  let username = "";
+  let id = "";
+
+  async function doPost() {
+    const res = await fetch("http://45.41.204.198:8070/v1/users", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ user: user, socketId: id }),
+      body: JSON.stringify({ user: username, socketId: id }),
     });
-    socket.emit("socketId", user);
+    socket.emit("socketId", username);
 
-    preferences.update(obj => obj = user)
-    pop();
+    preferences.set({user: {name: username}});
+
+    push('/');
   }
 </script>
 
@@ -25,7 +28,7 @@
     <div class="col-md-6 offset-md-3">
       <!-- <h2 class="text-center text-dark mt-5">Login Form</h2> -->
       <div class="card my-5">
-        <form class="card-body cardbody-color p-lg-5" action="#/chat">
+        <form class="card-body cardbody-color p-lg-5">
           <div class="text-center">
             <img
               src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
@@ -36,7 +39,7 @@
           </div>
           <div class="mb-3">
             <input
-              bind:value={user}
+              bind:value={username}
               type="text"
               class="form-control"
               id="Username"

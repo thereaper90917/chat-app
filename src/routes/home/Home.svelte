@@ -1,14 +1,15 @@
 <script>
   import People from "./Peoplelist.svelte";
   import Chat from "./Chat.svelte";
-  import { isLoggedIn } from "../../stores/users";
+  import { isLoggedIn, preferences } from "../../stores/users";
+  import {get} from 'svelte/store';
 
   import { push } from "svelte-spa-router";
-
-  if (!isLoggedIn) {
-	  console.log(preferences)
+  
+  if (!$isLoggedIn) {
     push("/login");
   }
+
 </script>
 
 <main>

@@ -5,9 +5,10 @@ import Login from './routes/login/Login.svelte'
 
 const routes = {
     // Exact path
-    '/': Login,
-	'/chat': Home,
+    '/': Home,
+    '/login': Login,
 }
+
 </script>
 
 <body>

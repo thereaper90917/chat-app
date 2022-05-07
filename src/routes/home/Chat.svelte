@@ -14,6 +14,10 @@
 
     // userName = user[0].name
     // console.log(user)
+    setTimeout(() => {
+      const chatMessages = document.querySelector(".chat-messages");
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1);
   });
 
   function sendMessage() {
@@ -30,8 +34,6 @@
 
     socket.emit("chat message", sendMessage);
     message = "";
-    const chatMessages = document.querySelector(".chat-messages");
-    chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
   function submit(event) {

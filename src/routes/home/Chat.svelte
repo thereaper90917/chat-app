@@ -1,5 +1,6 @@
 <script>
   import io from "socket.io-client";
+  import Gifs from './Gifs.svelte'
   import { preferences } from "../../stores/users";
 
   const socket = io("http://45.41.204.198:8070/");
@@ -114,5 +115,6 @@
       />
       <button class="btn btn-primary" on:click={sendMessage}>Send</button>
     </div>
+    <Gifs/>
   </div>
 </div>

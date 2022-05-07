@@ -21,6 +21,7 @@
   });
 
   function sendMessage() {
+   
     const sendMessage = {
       text: message,
       user: {
@@ -31,7 +32,10 @@
         url: "",
       },
     };
-
+    if(sendMessage.text.includes('https://')){
+      sendMessage.gif.included = true
+      sendMessage.gif.url = message
+    }
     socket.emit("chat message", sendMessage);
     message = "";
   }
@@ -61,54 +65,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="position-relative">
-    <div class="chat-messages p-4">
-      {#if gifs }
-      {#each gifs as gif}
-         <div class="chat-message-left pb-4">
-          <div>
-            <img
-              src="https://bootdey.com/img/Content/avatar/avatar3.png"
-              class="rounded-circle mr-1"
-              alt="Sharon Lessman"
-              width="40"
-              height="40"
-            />
-            <div class="text-muted small text-nowrap mt-2">
-              {current.toLocaleTimeString()}
-            </div>
-          </div>
-          <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-            <img src="{gif}" alt="" width="300px" height="200px">
-          </div>
-        </div>
-      {/each}
-      {/if}
-      {#if !gifsYes }
-      {#each messages as message }
-      <div class="chat-message-left pb-4">
-        <div>
-          <img
-            src="https://bootdey.com/img/Content/avatar/avatar3.png"
-            class="rounded-circle mr-1"
-            alt="Sharon Lessman"
-            width="40"
-            height="40"
-          />
-          <div class="text-muted small text-nowrap mt-2">
-            {current.toLocaleTimeString()}
-          </div>
-        </div>
-        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-          <div class="font-weight-bold mb-1">{userName}</div>
-          {message}
-        </div>
-      </div>
-      {/each}
-      {/if}
-
-    </div>
-  </div> -->
   <div class="position-relative">
     <div class="chat-messages p-4">
       {#each messages as message}

@@ -17,16 +17,21 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1100,
     height: 770,
+    titleBarStyle: "hidden",
+    titleBarOverlay: {
+      color: "#1e2124",
+      symbolColor: "#74b1be",
+    },
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "../public/index.html"));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 };
 
-app.enableSandbox()
+app.enableSandbox();
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

@@ -732,7 +732,7 @@ var app = (function () {
     const { Error: Error_1, Object: Object_1, console: console_1 } = globals;
 
     // (251:0) {:else}
-    function create_else_block(ctx) {
+    function create_else_block$1(ctx) {
     	let switch_instance;
     	let switch_instance_anchor;
     	let current;
@@ -817,7 +817,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block.name,
+    		id: create_else_block$1.name,
     		type: "else",
     		source: "(251:0) {:else}",
     		ctx
@@ -827,7 +827,7 @@ var app = (function () {
     }
 
     // (244:0) {#if componentParams}
-    function create_if_block(ctx) {
+    function create_if_block$1(ctx) {
     	let switch_instance;
     	let switch_instance_anchor;
     	let current;
@@ -915,7 +915,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block.name,
+    		id: create_if_block$1.name,
     		type: "if",
     		source: "(244:0) {#if componentParams}",
     		ctx
@@ -929,7 +929,7 @@ var app = (function () {
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block, create_else_block];
+    	const if_block_creators = [create_if_block$1, create_else_block$1];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -5469,75 +5469,172 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[1] = list[i];
+    	child_ctx[2] = list[i];
     	return child_ctx;
     }
 
-    // (267:5) {#each messages as message }
+    // (124:6) {:else}
+    function create_else_block(ctx) {
+    	let div1;
+    	let div0;
+    	let t0;
+    	let t1;
+    	let t2_value = /*message*/ ctx[2] + "";
+    	let t2;
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			t0 = text(/*userName*/ ctx[1]);
+    			t1 = space();
+    			t2 = text(t2_value);
+    			attr_dev(div0, "class", "font-weight-bold mb-1");
+    			add_location(div0, file$3, 125, 8, 3637);
+    			attr_dev(div1, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
+    			add_location(div1, file$3, 124, 6, 3568);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, t0);
+    			append_dev(div1, t1);
+    			append_dev(div1, t2);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*userName*/ 2) set_data_dev(t0, /*userName*/ ctx[1]);
+    			if (dirty & /*messages*/ 1 && t2_value !== (t2_value = /*message*/ ctx[2] + "")) set_data_dev(t2, t2_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block.name,
+    		type: "else",
+    		source: "(124:6) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (120:6) {#if message.includes('https://')}
+    function create_if_block(ctx) {
+    	let div;
+    	let img;
+    	let img_src_value;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			img = element("img");
+    			if (!src_url_equal(img.src, img_src_value = /*message*/ ctx[2].replace(`${/*userName*/ ctx[1]}:`, ""))) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "");
+    			attr_dev(img, "width", "300px");
+    			attr_dev(img, "height", "200px");
+    			add_location(img, file$3, 121, 8, 3447);
+    			attr_dev(div, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
+    			add_location(div, file$3, 120, 6, 3378);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, img);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*messages, userName*/ 3 && !src_url_equal(img.src, img_src_value = /*message*/ ctx[2].replace(`${/*userName*/ ctx[1]}:`, ""))) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(120:6) {#if message.includes('https://')}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (105:5) {#each messages as message }
     function create_each_block(ctx) {
-    	let div4;
+    	let div2;
     	let div1;
     	let img;
     	let img_src_value;
     	let t0;
     	let div0;
     	let t2;
-    	let div3;
-    	let div2;
-    	let t4;
-    	let t5_value = /*message*/ ctx[1] + "";
-    	let t5;
-    	let t6;
+    	let show_if;
+    	let t3;
+
+    	function select_block_type(ctx, dirty) {
+    		if (dirty & /*messages*/ 1) show_if = null;
+    		if (show_if == null) show_if = !!/*message*/ ctx[2].includes('https://');
+    		if (show_if) return create_if_block;
+    		return create_else_block;
+    	}
+
+    	let current_block_type = select_block_type(ctx, -1);
+    	let if_block = current_block_type(ctx);
 
     	const block = {
     		c: function create() {
-    			div4 = element("div");
+    			div2 = element("div");
     			div1 = element("div");
     			img = element("img");
     			t0 = space();
     			div0 = element("div");
-    			div0.textContent = `${/*current*/ ctx[2].toLocaleTimeString()}`;
+    			div0.textContent = `${/*current*/ ctx[3].toLocaleTimeString()}`;
     			t2 = space();
-    			div3 = element("div");
-    			div2 = element("div");
-    			div2.textContent = "Sharon Lessman";
-    			t4 = space();
-    			t5 = text(t5_value);
-    			t6 = space();
+    			if_block.c();
+    			t3 = space();
     			if (!src_url_equal(img.src, img_src_value = "https://bootdey.com/img/Content/avatar/avatar3.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "class", "rounded-circle mr-1");
     			attr_dev(img, "alt", "Sharon Lessman");
     			attr_dev(img, "width", "40");
     			attr_dev(img, "height", "40");
-    			add_location(img, file$3, 269, 8, 8588);
+    			add_location(img, file$3, 107, 8, 2993);
     			attr_dev(div0, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div0, file$3, 276, 8, 8798);
-    			add_location(div1, file$3, 268, 6, 8573);
-    			attr_dev(div2, "class", "font-weight-bold mb-1");
-    			add_location(div2, file$3, 281, 8, 8994);
-    			attr_dev(div3, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
-    			add_location(div3, file$3, 280, 6, 8925);
-    			attr_dev(div4, "class", "chat-message-left pb-4");
-    			add_location(div4, file$3, 267, 5, 8529);
+    			add_location(div0, file$3, 114, 8, 3203);
+    			add_location(div1, file$3, 106, 6, 2978);
+    			attr_dev(div2, "class", "chat-message-left pb-4");
+    			add_location(div2, file$3, 105, 5, 2934);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div4, anchor);
-    			append_dev(div4, div1);
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div1);
     			append_dev(div1, img);
     			append_dev(div1, t0);
     			append_dev(div1, div0);
-    			append_dev(div4, t2);
-    			append_dev(div4, div3);
-    			append_dev(div3, div2);
-    			append_dev(div3, t4);
-    			append_dev(div3, t5);
-    			append_dev(div4, t6);
+    			append_dev(div2, t2);
+    			if_block.m(div2, null);
+    			append_dev(div2, t3);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*messages*/ 1 && t5_value !== (t5_value = /*message*/ ctx[1] + "")) set_data_dev(t5, t5_value);
+    			if (current_block_type === (current_block_type = select_block_type(ctx, dirty)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(div2, t3);
+    				}
+    			}
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div4);
+    			if (detaching) detach_dev(div2);
+    			if_block.d();
     		}
     	};
 
@@ -5545,7 +5642,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(267:5) {#each messages as message }",
+    		source: "(105:5) {#each messages as message }",
     		ctx
     	});
 
@@ -5553,12 +5650,12 @@ var app = (function () {
     }
 
     function create_fragment$3(ctx) {
-    	let div64;
+    	let div9;
     	let div4;
     	let div3;
     	let div0;
-    	let img0;
-    	let img0_src_value;
+    	let img;
+    	let img_src_value;
     	let t0;
     	let div2;
     	let strong;
@@ -5566,134 +5663,13 @@ var app = (function () {
     	let div1;
     	let em;
     	let t4;
-    	let div61;
-    	let div60;
-    	let div9;
     	let div6;
-    	let img1;
-    	let img1_src_value;
-    	let t5;
     	let div5;
-    	let t7;
+    	let t5;
     	let div8;
     	let div7;
-    	let t9;
-    	let t10;
-    	let div14;
-    	let div11;
-    	let img2;
-    	let img2_src_value;
-    	let t11;
-    	let div10;
-    	let t13;
-    	let div13;
-    	let div12;
-    	let t15;
-    	let t16;
-    	let div19;
-    	let div16;
-    	let img3;
-    	let img3_src_value;
-    	let t17;
-    	let div15;
-    	let t19;
-    	let div18;
-    	let div17;
-    	let t21;
-    	let t22;
-    	let div24;
-    	let div21;
-    	let img4;
-    	let img4_src_value;
-    	let t23;
-    	let div20;
-    	let t25;
-    	let div23;
-    	let div22;
-    	let t27;
-    	let t28;
-    	let div29;
-    	let div26;
-    	let img5;
-    	let img5_src_value;
-    	let t29;
-    	let div25;
-    	let t31;
-    	let div28;
-    	let div27;
-    	let t33;
-    	let t34;
-    	let div34;
-    	let div31;
-    	let img6;
-    	let img6_src_value;
-    	let t35;
-    	let div30;
-    	let t37;
-    	let div33;
-    	let div32;
-    	let t39;
-    	let t40;
-    	let div39;
-    	let div36;
-    	let img7;
-    	let img7_src_value;
-    	let t41;
-    	let div35;
-    	let t43;
-    	let div38;
-    	let div37;
-    	let t45;
-    	let t46;
-    	let div44;
-    	let div41;
-    	let img8;
-    	let img8_src_value;
-    	let t47;
-    	let div40;
-    	let t49;
-    	let div43;
-    	let div42;
-    	let t51;
-    	let t52;
-    	let div49;
-    	let div46;
-    	let img9;
-    	let img9_src_value;
-    	let t53;
-    	let div45;
-    	let t55;
-    	let div48;
-    	let div47;
-    	let t57;
-    	let t58;
-    	let div54;
-    	let div51;
-    	let img10;
-    	let img10_src_value;
-    	let t59;
-    	let div50;
-    	let t61;
-    	let div53;
-    	let div52;
-    	let t63;
-    	let t64;
-    	let div59;
-    	let div56;
-    	let img11;
-    	let img11_src_value;
-    	let t65;
-    	let div55;
-    	let t67;
-    	let div58;
-    	let div57;
-    	let t69;
-    	let t70;
-    	let t71;
-    	let div63;
-    	let div62;
     	let input;
-    	let t72;
+    	let t6;
     	let button;
     	let mounted;
     	let dispose;
@@ -5707,519 +5683,112 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div64 = element("div");
+    			div9 = element("div");
     			div4 = element("div");
     			div3 = element("div");
     			div0 = element("div");
-    			img0 = element("img");
+    			img = element("img");
     			t0 = space();
     			div2 = element("div");
     			strong = element("strong");
-    			strong.textContent = "Sharon Lessman";
+    			strong.textContent = "General Chat";
     			t2 = space();
     			div1 = element("div");
     			em = element("em");
-    			em.textContent = "Typing...";
+    			em.textContent = "Talk About Anything";
     			t4 = space();
-    			div61 = element("div");
-    			div60 = element("div");
-    			div9 = element("div");
     			div6 = element("div");
-    			img1 = element("img");
-    			t5 = space();
     			div5 = element("div");
-    			div5.textContent = "2:33 am";
-    			t7 = space();
-    			div8 = element("div");
-    			div7 = element("div");
-    			div7.textContent = "You";
-    			t9 = text("\r\n          Lorem ipsum dolor sit amet, vis erat denique in, dicunt\r\n          prodesset te vix.");
-    			t10 = space();
-    			div14 = element("div");
-    			div11 = element("div");
-    			img2 = element("img");
-    			t11 = space();
-    			div10 = element("div");
-    			div10.textContent = "2:34 am";
-    			t13 = space();
-    			div13 = element("div");
-    			div12 = element("div");
-    			div12.textContent = "Sharon Lessman";
-    			t15 = text("\r\n          Sit meis deleniti eu, pri vidit meliore docendi ut, an eum\r\n          erat animal commodo.");
-    			t16 = space();
-    			div19 = element("div");
-    			div16 = element("div");
-    			img3 = element("img");
-    			t17 = space();
-    			div15 = element("div");
-    			div15.textContent = "2:35 am";
-    			t19 = space();
-    			div18 = element("div");
-    			div17 = element("div");
-    			div17.textContent = "You";
-    			t21 = text("\r\n          Cum ea graeci tractatos.");
-    			t22 = space();
-    			div24 = element("div");
-    			div21 = element("div");
-    			img4 = element("img");
-    			t23 = space();
-    			div20 = element("div");
-    			div20.textContent = "2:36 am";
-    			t25 = space();
-    			div23 = element("div");
-    			div22 = element("div");
-    			div22.textContent = "Sharon Lessman";
-    			t27 = text("\r\n          Sed pulvinar, massa vitae interdum pulvinar, risus lectus\r\n          porttitor magna, vitae commodo lectus mauris et velit.\r\n          Proin ultricies placerat imperdiet. Morbi varius quam ac\r\n          venenatis tempus.");
-    			t28 = space();
-    			div29 = element("div");
-    			div26 = element("div");
-    			img5 = element("img");
-    			t29 = space();
-    			div25 = element("div");
-    			div25.textContent = "2:37 am";
-    			t31 = space();
-    			div28 = element("div");
-    			div27 = element("div");
-    			div27.textContent = "Sharon Lessman";
-    			t33 = text("\r\n          Cras pulvinar, sapien id vehicula aliquet, diam velit\r\n          elementum orci.");
-    			t34 = space();
-    			div34 = element("div");
-    			div31 = element("div");
-    			img6 = element("img");
-    			t35 = space();
-    			div30 = element("div");
-    			div30.textContent = "2:38 am";
-    			t37 = space();
-    			div33 = element("div");
-    			div32 = element("div");
-    			div32.textContent = "You";
-    			t39 = text("\r\n          Lorem ipsum dolor sit amet, vis erat denique in, dicunt\r\n          prodesset te vix.");
-    			t40 = space();
-    			div39 = element("div");
-    			div36 = element("div");
-    			img7 = element("img");
-    			t41 = space();
-    			div35 = element("div");
-    			div35.textContent = "2:39 am";
-    			t43 = space();
-    			div38 = element("div");
-    			div37 = element("div");
-    			div37.textContent = "Sharon Lessman";
-    			t45 = text("\r\n          Sit meis deleniti eu, pri vidit meliore docendi ut, an eum\r\n          erat animal commodo.");
-    			t46 = space();
-    			div44 = element("div");
-    			div41 = element("div");
-    			img8 = element("img");
-    			t47 = space();
-    			div40 = element("div");
-    			div40.textContent = "2:40 am";
-    			t49 = space();
-    			div43 = element("div");
-    			div42 = element("div");
-    			div42.textContent = "You";
-    			t51 = text("\r\n          Cum ea graeci tractatos.");
-    			t52 = space();
-    			div49 = element("div");
-    			div46 = element("div");
-    			img9 = element("img");
-    			t53 = space();
-    			div45 = element("div");
-    			div45.textContent = "2:41 am";
-    			t55 = space();
-    			div48 = element("div");
-    			div47 = element("div");
-    			div47.textContent = "You";
-    			t57 = text("\r\n          Morbi finibus, lorem id placerat ullamcorper, nunc enim\r\n          ultrices massa, id dignissim metus urna eget purus.");
-    			t58 = space();
-    			div54 = element("div");
-    			div51 = element("div");
-    			img10 = element("img");
-    			t59 = space();
-    			div50 = element("div");
-    			div50.textContent = "2:42 am";
-    			t61 = space();
-    			div53 = element("div");
-    			div52 = element("div");
-    			div52.textContent = "Sharon Lessman";
-    			t63 = text("\r\n          Sed pulvinar, massa vitae interdum pulvinar, risus lectus\r\n          porttitor magna, vitae commodo lectus mauris et velit.\r\n          Proin ultricies placerat imperdiet. Morbi varius quam ac\r\n          venenatis tempus.");
-    			t64 = space();
-    			div59 = element("div");
-    			div56 = element("div");
-    			img11 = element("img");
-    			t65 = space();
-    			div55 = element("div");
-    			div55.textContent = "2:43 am";
-    			t67 = space();
-    			div58 = element("div");
-    			div57 = element("div");
-    			div57.textContent = "You";
-    			t69 = text("\r\n          Lorem ipsum dolor sit amet, vis erat denique in, dicunt\r\n          prodesset te vix.");
-    			t70 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t71 = space();
-    			div63 = element("div");
-    			div62 = element("div");
+    			t5 = space();
+    			div8 = element("div");
+    			div7 = element("div");
     			input = element("input");
-    			t72 = space();
+    			t6 = space();
     			button = element("button");
     			button.textContent = "Send";
-    			if (!src_url_equal(img0.src, img0_src_value = "https://bootdey.com/img/Content/avatar/avatar3.png")) attr_dev(img0, "src", img0_src_value);
-    			attr_dev(img0, "class", "rounded-circle mr-1");
-    			attr_dev(img0, "alt", "Sharon Lessman");
-    			attr_dev(img0, "width", "40");
-    			attr_dev(img0, "height", "40");
-    			add_location(img0, file$3, 27, 8, 639);
+    			if (!src_url_equal(img.src, img_src_value = "https://bootdey.com/img/Content/avatar/avatar3.png")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "class", "rounded-circle mr-1");
+    			attr_dev(img, "alt", "Sharon Lessman");
+    			attr_dev(img, "width", "40");
+    			attr_dev(img, "height", "40");
+    			add_location(img, file$3, 40, 8, 924);
     			attr_dev(div0, "class", "position-relative");
-    			add_location(div0, file$3, 26, 6, 598);
-    			add_location(strong, file$3, 36, 8, 901);
-    			add_location(em, file$3, 37, 38, 972);
+    			add_location(div0, file$3, 39, 6, 883);
+    			add_location(strong, file$3, 49, 8, 1186);
+    			add_location(em, file$3, 50, 38, 1255);
     			attr_dev(div1, "class", "text-muted small");
-    			add_location(div1, file$3, 37, 8, 942);
+    			add_location(div1, file$3, 50, 8, 1225);
     			attr_dev(div2, "class", "flex-grow-1 pl-3");
-    			add_location(div2, file$3, 35, 6, 861);
+    			add_location(div2, file$3, 48, 6, 1146);
     			attr_dev(div3, "class", "d-flex align-items-center py-1");
-    			add_location(div3, file$3, 25, 4, 546);
+    			add_location(div3, file$3, 38, 4, 831);
     			attr_dev(div4, "class", "py-2 px-4 border-bottom d-none d-lg-block");
-    			add_location(div4, file$3, 24, 2, 485);
-    			if (!src_url_equal(img1.src, img1_src_value = "https://bootdey.com/img/Content/avatar/avatar1.png")) attr_dev(img1, "src", img1_src_value);
-    			attr_dev(img1, "class", "rounded-circle mr-1");
-    			attr_dev(img1, "alt", "Chris Wood");
-    			attr_dev(img1, "width", "40");
-    			attr_dev(img1, "height", "40");
-    			add_location(img1, file$3, 46, 10, 1178);
-    			attr_dev(div5, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div5, file$3, 53, 10, 1398);
-    			add_location(div6, file$3, 45, 8, 1161);
-    			attr_dev(div7, "class", "font-weight-bold mb-1");
-    			add_location(div7, file$3, 58, 10, 1581);
-    			attr_dev(div8, "class", "flex-shrink-1 bg-light rounded py-2 px-3 mr-3");
-    			add_location(div8, file$3, 57, 8, 1510);
-    			attr_dev(div9, "class", "chat-message-right pb-4");
-    			add_location(div9, file$3, 44, 6, 1114);
-    			if (!src_url_equal(img2.src, img2_src_value = "https://bootdey.com/img/Content/avatar/avatar3.png")) attr_dev(img2, "src", img2_src_value);
-    			attr_dev(img2, "class", "rounded-circle mr-1");
-    			attr_dev(img2, "alt", "Sharon Lessman");
-    			attr_dev(img2, "width", "40");
-    			attr_dev(img2, "height", "40");
-    			add_location(img2, file$3, 66, 10, 1824);
-    			attr_dev(div10, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div10, file$3, 73, 10, 2048);
-    			add_location(div11, file$3, 65, 8, 1807);
-    			attr_dev(div12, "class", "font-weight-bold mb-1");
-    			add_location(div12, file$3, 78, 10, 2231);
-    			attr_dev(div13, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
-    			add_location(div13, file$3, 77, 8, 2160);
-    			attr_dev(div14, "class", "chat-message-left pb-4");
-    			add_location(div14, file$3, 64, 6, 1761);
-    			if (!src_url_equal(img3.src, img3_src_value = "https://bootdey.com/img/Content/avatar/avatar1.png")) attr_dev(img3, "src", img3_src_value);
-    			attr_dev(img3, "class", "rounded-circle mr-1");
-    			attr_dev(img3, "alt", "Chris Wood");
-    			attr_dev(img3, "width", "40");
-    			attr_dev(img3, "height", "40");
-    			add_location(img3, file$3, 86, 10, 2492);
-    			attr_dev(div15, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div15, file$3, 93, 10, 2712);
-    			add_location(div16, file$3, 85, 8, 2475);
-    			attr_dev(div17, "class", "font-weight-bold mb-1");
-    			add_location(div17, file$3, 98, 10, 2895);
-    			attr_dev(div18, "class", "flex-shrink-1 bg-light rounded py-2 px-3 mr-3");
-    			add_location(div18, file$3, 97, 8, 2824);
-    			attr_dev(div19, "class", "chat-message-right mb-4");
-    			add_location(div19, file$3, 84, 6, 2428);
-    			if (!src_url_equal(img4.src, img4_src_value = "https://bootdey.com/img/Content/avatar/avatar3.png")) attr_dev(img4, "src", img4_src_value);
-    			attr_dev(img4, "class", "rounded-circle mr-1");
-    			attr_dev(img4, "alt", "Sharon Lessman");
-    			attr_dev(img4, "width", "40");
-    			attr_dev(img4, "height", "40");
-    			add_location(img4, file$3, 105, 10, 3078);
-    			attr_dev(div20, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div20, file$3, 112, 10, 3302);
-    			add_location(div21, file$3, 104, 8, 3061);
-    			attr_dev(div22, "class", "font-weight-bold mb-1");
-    			add_location(div22, file$3, 117, 10, 3485);
-    			attr_dev(div23, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
-    			add_location(div23, file$3, 116, 8, 3414);
-    			attr_dev(div24, "class", "chat-message-left pb-4");
-    			add_location(div24, file$3, 103, 6, 3015);
-    			if (!src_url_equal(img5.src, img5_src_value = "https://bootdey.com/img/Content/avatar/avatar3.png")) attr_dev(img5, "src", img5_src_value);
-    			attr_dev(img5, "class", "rounded-circle mr-1");
-    			attr_dev(img5, "alt", "Sharon Lessman");
-    			attr_dev(img5, "width", "40");
-    			attr_dev(img5, "height", "40");
-    			add_location(img5, file$3, 127, 10, 3875);
-    			attr_dev(div25, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div25, file$3, 134, 10, 4099);
-    			add_location(div26, file$3, 126, 8, 3858);
-    			attr_dev(div27, "class", "font-weight-bold mb-1");
-    			add_location(div27, file$3, 139, 10, 4282);
-    			attr_dev(div28, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
-    			add_location(div28, file$3, 138, 8, 4211);
-    			attr_dev(div29, "class", "chat-message-left pb-4");
-    			add_location(div29, file$3, 125, 6, 3812);
-    			if (!src_url_equal(img6.src, img6_src_value = "https://bootdey.com/img/Content/avatar/avatar1.png")) attr_dev(img6, "src", img6_src_value);
-    			attr_dev(img6, "class", "rounded-circle mr-1");
-    			attr_dev(img6, "alt", "Chris Wood");
-    			attr_dev(img6, "width", "40");
-    			attr_dev(img6, "height", "40");
-    			add_location(img6, file$3, 147, 10, 4533);
-    			attr_dev(div30, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div30, file$3, 154, 10, 4753);
-    			add_location(div31, file$3, 146, 8, 4516);
-    			attr_dev(div32, "class", "font-weight-bold mb-1");
-    			add_location(div32, file$3, 159, 10, 4936);
-    			attr_dev(div33, "class", "flex-shrink-1 bg-light rounded py-2 px-3 mr-3");
-    			add_location(div33, file$3, 158, 8, 4865);
-    			attr_dev(div34, "class", "chat-message-right mb-4");
-    			add_location(div34, file$3, 145, 6, 4469);
-    			if (!src_url_equal(img7.src, img7_src_value = "https://bootdey.com/img/Content/avatar/avatar3.png")) attr_dev(img7, "src", img7_src_value);
-    			attr_dev(img7, "class", "rounded-circle mr-1");
-    			attr_dev(img7, "alt", "Sharon Lessman");
-    			attr_dev(img7, "width", "40");
-    			attr_dev(img7, "height", "40");
-    			add_location(img7, file$3, 167, 10, 5179);
-    			attr_dev(div35, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div35, file$3, 174, 10, 5403);
-    			add_location(div36, file$3, 166, 8, 5162);
-    			attr_dev(div37, "class", "font-weight-bold mb-1");
-    			add_location(div37, file$3, 179, 10, 5586);
-    			attr_dev(div38, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
-    			add_location(div38, file$3, 178, 8, 5515);
-    			attr_dev(div39, "class", "chat-message-left pb-4");
-    			add_location(div39, file$3, 165, 6, 5116);
-    			if (!src_url_equal(img8.src, img8_src_value = "https://bootdey.com/img/Content/avatar/avatar1.png")) attr_dev(img8, "src", img8_src_value);
-    			attr_dev(img8, "class", "rounded-circle mr-1");
-    			attr_dev(img8, "alt", "Chris Wood");
-    			attr_dev(img8, "width", "40");
-    			attr_dev(img8, "height", "40");
-    			add_location(img8, file$3, 187, 10, 5847);
-    			attr_dev(div40, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div40, file$3, 194, 10, 6067);
-    			add_location(div41, file$3, 186, 8, 5830);
-    			attr_dev(div42, "class", "font-weight-bold mb-1");
-    			add_location(div42, file$3, 199, 10, 6250);
-    			attr_dev(div43, "class", "flex-shrink-1 bg-light rounded py-2 px-3 mr-3");
-    			add_location(div43, file$3, 198, 8, 6179);
-    			attr_dev(div44, "class", "chat-message-right mb-4");
-    			add_location(div44, file$3, 185, 6, 5783);
-    			if (!src_url_equal(img9.src, img9_src_value = "https://bootdey.com/img/Content/avatar/avatar1.png")) attr_dev(img9, "src", img9_src_value);
-    			attr_dev(img9, "class", "rounded-circle mr-1");
-    			attr_dev(img9, "alt", "Chris Wood");
-    			attr_dev(img9, "width", "40");
-    			attr_dev(img9, "height", "40");
-    			add_location(img9, file$3, 206, 10, 6434);
-    			attr_dev(div45, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div45, file$3, 213, 10, 6654);
-    			add_location(div46, file$3, 205, 8, 6417);
-    			attr_dev(div47, "class", "font-weight-bold mb-1");
-    			add_location(div47, file$3, 218, 10, 6837);
-    			attr_dev(div48, "class", "flex-shrink-1 bg-light rounded py-2 px-3 mr-3");
-    			add_location(div48, file$3, 217, 8, 6766);
-    			attr_dev(div49, "class", "chat-message-right mb-4");
-    			add_location(div49, file$3, 204, 6, 6370);
-    			if (!src_url_equal(img10.src, img10_src_value = "https://bootdey.com/img/Content/avatar/avatar3.png")) attr_dev(img10, "src", img10_src_value);
-    			attr_dev(img10, "class", "rounded-circle mr-1");
-    			attr_dev(img10, "alt", "Sharon Lessman");
-    			attr_dev(img10, "width", "40");
-    			attr_dev(img10, "height", "40");
-    			add_location(img10, file$3, 226, 10, 7114);
-    			attr_dev(div50, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div50, file$3, 233, 10, 7338);
-    			add_location(div51, file$3, 225, 8, 7097);
-    			attr_dev(div52, "class", "font-weight-bold mb-1");
-    			add_location(div52, file$3, 238, 10, 7521);
-    			attr_dev(div53, "class", "flex-shrink-1 bg-light rounded py-2 px-3 ml-3");
-    			add_location(div53, file$3, 237, 8, 7450);
-    			attr_dev(div54, "class", "chat-message-left pb-4");
-    			add_location(div54, file$3, 224, 6, 7051);
-    			if (!src_url_equal(img11.src, img11_src_value = "https://bootdey.com/img/Content/avatar/avatar1.png")) attr_dev(img11, "src", img11_src_value);
-    			attr_dev(img11, "class", "rounded-circle mr-1");
-    			attr_dev(img11, "alt", "Chris Wood");
-    			attr_dev(img11, "width", "40");
-    			attr_dev(img11, "height", "40");
-    			add_location(img11, file$3, 248, 10, 7912);
-    			attr_dev(div55, "class", "text-muted small text-nowrap mt-2");
-    			add_location(div55, file$3, 255, 10, 8132);
-    			add_location(div56, file$3, 247, 8, 7895);
-    			attr_dev(div57, "class", "font-weight-bold mb-1");
-    			add_location(div57, file$3, 260, 10, 8315);
-    			attr_dev(div58, "class", "flex-shrink-1 bg-light rounded py-2 px-3 mr-3");
-    			add_location(div58, file$3, 259, 8, 8244);
-    			attr_dev(div59, "class", "chat-message-right mb-4");
-    			add_location(div59, file$3, 246, 6, 7848);
-    			attr_dev(div60, "class", "chat-messages p-4");
-    			add_location(div60, file$3, 43, 4, 1075);
-    			attr_dev(div61, "class", "position-relative");
-    			add_location(div61, file$3, 42, 2, 1038);
+    			add_location(div4, file$3, 37, 2, 770);
+    			attr_dev(div5, "class", "chat-messages p-4");
+    			add_location(div5, file$3, 103, 4, 2861);
+    			attr_dev(div6, "class", "position-relative");
+    			add_location(div6, file$3, 102, 2, 2824);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "form-control");
     			attr_dev(input, "placeholder", "Type your message");
-    			add_location(input, file$3, 291, 6, 9221);
+    			add_location(input, file$3, 136, 6, 3871);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$3, 298, 6, 9399);
-    			attr_dev(div62, "class", "input-group");
-    			add_location(div62, file$3, 290, 4, 9188);
-    			attr_dev(div63, "class", "flex-grow-0 py-3 px-4 border-top");
-    			add_location(div63, file$3, 289, 2, 9136);
-    			attr_dev(div64, "class", "col-12 col-lg-7 col-xl-9");
-    			add_location(div64, file$3, 23, 0, 443);
+    			add_location(button, file$3, 143, 6, 4049);
+    			attr_dev(div7, "class", "input-group");
+    			add_location(div7, file$3, 135, 4, 3838);
+    			attr_dev(div8, "class", "flex-grow-0 py-3 px-4 border-top");
+    			add_location(div8, file$3, 134, 2, 3786);
+    			attr_dev(div9, "class", "col-12 col-lg-7 col-xl-9");
+    			add_location(div9, file$3, 36, 0, 728);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div64, anchor);
-    			append_dev(div64, div4);
+    			insert_dev(target, div9, anchor);
+    			append_dev(div9, div4);
     			append_dev(div4, div3);
     			append_dev(div3, div0);
-    			append_dev(div0, img0);
+    			append_dev(div0, img);
     			append_dev(div3, t0);
     			append_dev(div3, div2);
     			append_dev(div2, strong);
     			append_dev(div2, t2);
     			append_dev(div2, div1);
     			append_dev(div1, em);
-    			append_dev(div64, t4);
-    			append_dev(div64, div61);
-    			append_dev(div61, div60);
-    			append_dev(div60, div9);
+    			append_dev(div9, t4);
     			append_dev(div9, div6);
-    			append_dev(div6, img1);
-    			append_dev(div6, t5);
     			append_dev(div6, div5);
-    			append_dev(div9, t7);
-    			append_dev(div9, div8);
-    			append_dev(div8, div7);
-    			append_dev(div8, t9);
-    			append_dev(div60, t10);
-    			append_dev(div60, div14);
-    			append_dev(div14, div11);
-    			append_dev(div11, img2);
-    			append_dev(div11, t11);
-    			append_dev(div11, div10);
-    			append_dev(div14, t13);
-    			append_dev(div14, div13);
-    			append_dev(div13, div12);
-    			append_dev(div13, t15);
-    			append_dev(div60, t16);
-    			append_dev(div60, div19);
-    			append_dev(div19, div16);
-    			append_dev(div16, img3);
-    			append_dev(div16, t17);
-    			append_dev(div16, div15);
-    			append_dev(div19, t19);
-    			append_dev(div19, div18);
-    			append_dev(div18, div17);
-    			append_dev(div18, t21);
-    			append_dev(div60, t22);
-    			append_dev(div60, div24);
-    			append_dev(div24, div21);
-    			append_dev(div21, img4);
-    			append_dev(div21, t23);
-    			append_dev(div21, div20);
-    			append_dev(div24, t25);
-    			append_dev(div24, div23);
-    			append_dev(div23, div22);
-    			append_dev(div23, t27);
-    			append_dev(div60, t28);
-    			append_dev(div60, div29);
-    			append_dev(div29, div26);
-    			append_dev(div26, img5);
-    			append_dev(div26, t29);
-    			append_dev(div26, div25);
-    			append_dev(div29, t31);
-    			append_dev(div29, div28);
-    			append_dev(div28, div27);
-    			append_dev(div28, t33);
-    			append_dev(div60, t34);
-    			append_dev(div60, div34);
-    			append_dev(div34, div31);
-    			append_dev(div31, img6);
-    			append_dev(div31, t35);
-    			append_dev(div31, div30);
-    			append_dev(div34, t37);
-    			append_dev(div34, div33);
-    			append_dev(div33, div32);
-    			append_dev(div33, t39);
-    			append_dev(div60, t40);
-    			append_dev(div60, div39);
-    			append_dev(div39, div36);
-    			append_dev(div36, img7);
-    			append_dev(div36, t41);
-    			append_dev(div36, div35);
-    			append_dev(div39, t43);
-    			append_dev(div39, div38);
-    			append_dev(div38, div37);
-    			append_dev(div38, t45);
-    			append_dev(div60, t46);
-    			append_dev(div60, div44);
-    			append_dev(div44, div41);
-    			append_dev(div41, img8);
-    			append_dev(div41, t47);
-    			append_dev(div41, div40);
-    			append_dev(div44, t49);
-    			append_dev(div44, div43);
-    			append_dev(div43, div42);
-    			append_dev(div43, t51);
-    			append_dev(div60, t52);
-    			append_dev(div60, div49);
-    			append_dev(div49, div46);
-    			append_dev(div46, img9);
-    			append_dev(div46, t53);
-    			append_dev(div46, div45);
-    			append_dev(div49, t55);
-    			append_dev(div49, div48);
-    			append_dev(div48, div47);
-    			append_dev(div48, t57);
-    			append_dev(div60, t58);
-    			append_dev(div60, div54);
-    			append_dev(div54, div51);
-    			append_dev(div51, img10);
-    			append_dev(div51, t59);
-    			append_dev(div51, div50);
-    			append_dev(div54, t61);
-    			append_dev(div54, div53);
-    			append_dev(div53, div52);
-    			append_dev(div53, t63);
-    			append_dev(div60, t64);
-    			append_dev(div60, div59);
-    			append_dev(div59, div56);
-    			append_dev(div56, img11);
-    			append_dev(div56, t65);
-    			append_dev(div56, div55);
-    			append_dev(div59, t67);
-    			append_dev(div59, div58);
-    			append_dev(div58, div57);
-    			append_dev(div58, t69);
-    			append_dev(div60, t70);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(div60, null);
+    				each_blocks[i].m(div5, null);
     			}
 
-    			append_dev(div64, t71);
-    			append_dev(div64, div63);
-    			append_dev(div63, div62);
-    			append_dev(div62, input);
-    			set_input_value(input, /*message*/ ctx[1]);
-    			append_dev(div62, t72);
-    			append_dev(div62, button);
+    			append_dev(div9, t5);
+    			append_dev(div9, div8);
+    			append_dev(div8, div7);
+    			append_dev(div7, input);
+    			set_input_value(input, /*message*/ ctx[2]);
+    			append_dev(div7, t6);
+    			append_dev(div7, button);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "keydown", /*submit*/ ctx[4], false, false, false),
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[5]),
-    					listen_dev(button, "click", /*sendMessage*/ ctx[3], false, false, false)
+    					listen_dev(input, "keydown", /*submit*/ ctx[5], false, false, false),
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[6]),
+    					listen_dev(button, "click", /*sendMessage*/ ctx[4], false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*messages, current*/ 5) {
+    			if (dirty & /*messages, userName, current*/ 11) {
     				each_value = /*messages*/ ctx[0];
     				validate_each_argument(each_value);
     				let i;
@@ -6232,7 +5801,7 @@ var app = (function () {
     					} else {
     						each_blocks[i] = create_each_block(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(div60, null);
+    						each_blocks[i].m(div5, null);
     					}
     				}
 
@@ -6243,14 +5812,14 @@ var app = (function () {
     				each_blocks.length = each_value.length;
     			}
 
-    			if (dirty & /*message*/ 2 && input.value !== /*message*/ ctx[1]) {
-    				set_input_value(input, /*message*/ ctx[1]);
+    			if (dirty & /*message*/ 4 && input.value !== /*message*/ ctx[2]) {
+    				set_input_value(input, /*message*/ ctx[2]);
     			}
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div64);
+    			if (detaching) detach_dev(div9);
     			destroy_each(each_blocks, detaching);
     			mounted = false;
     			run_all(dispose);
@@ -6271,18 +5840,23 @@ var app = (function () {
     function instance$3($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Chat', slots, []);
-    	const socket = lookup("http://localhost:3000");
+    	const socket = lookup("http://localhost:8001");
     	let current = new Date();
     	let messages = [];
     	let message = '';
+    	let userName = '';
 
-    	socket.on('chat message', data => {
-    		$$invalidate(0, messages = [...messages, data]);
-    	});
+    	socket.on('chat message', (user, msg) => {
+    		$$invalidate(0, messages = [...messages, `${user[0].name}: \n ${msg}`]);
+    		$$invalidate(1, userName = user[0].name);
+    	}); // userName = user[0].name
+    	// console.log(user)
 
     	function sendMessage() {
     		socket.emit('chat message', message);
-    		$$invalidate(1, message = '');
+    		$$invalidate(2, message = '');
+    		const chatMessages = document.querySelector('.chat-messages');
+    		chatMessages.scrollTop = chatMessages.scrollHeight;
     	}
 
     	function submit(event) {
@@ -6299,7 +5873,7 @@ var app = (function () {
 
     	function input_input_handler() {
     		message = this.value;
-    		$$invalidate(1, message);
+    		$$invalidate(2, message);
     	}
 
     	$$self.$capture_state = () => ({
@@ -6308,21 +5882,23 @@ var app = (function () {
     		current,
     		messages,
     		message,
+    		userName,
     		sendMessage,
     		submit
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('current' in $$props) $$invalidate(2, current = $$props.current);
+    		if ('current' in $$props) $$invalidate(3, current = $$props.current);
     		if ('messages' in $$props) $$invalidate(0, messages = $$props.messages);
-    		if ('message' in $$props) $$invalidate(1, message = $$props.message);
+    		if ('message' in $$props) $$invalidate(2, message = $$props.message);
+    		if ('userName' in $$props) $$invalidate(1, userName = $$props.userName);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [messages, message, current, sendMessage, submit, input_input_handler];
+    	return [messages, userName, message, current, sendMessage, submit, input_input_handler];
     }
 
     class Chat extends SvelteComponentDev {
@@ -6437,7 +6013,6 @@ var app = (function () {
     }
 
     /* src\routes\login\Login.svelte generated by Svelte v3.47.0 */
-
     const file$1 = "src\\routes\\login\\Login.svelte";
 
     function create_fragment$1(ctx) {
@@ -6455,6 +6030,8 @@ var app = (function () {
     	let t1;
     	let div2;
     	let button;
+    	let mounted;
+    	let dispose;
 
     	const block = {
     		c: function create() {
@@ -6476,33 +6053,33 @@ var app = (function () {
     			attr_dev(img, "class", "img-fluid profile-image-pic img-thumbnail rounded-circle my-3 svelte-1di2fv1");
     			attr_dev(img, "width", "200px");
     			attr_dev(img, "alt", "profile");
-    			add_location(img, file$1, 7, 14, 323);
+    			add_location(img, file$1, 26, 14, 757);
     			attr_dev(div0, "class", "text-center");
-    			add_location(div0, file$1, 6, 12, 282);
+    			add_location(div0, file$1, 25, 12, 716);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "class", "form-control");
     			attr_dev(input, "id", "Username");
     			attr_dev(input, "aria-describedby", "emailHelp");
     			attr_dev(input, "placeholder", "User Name");
-    			add_location(input, file$1, 16, 14, 658);
+    			add_location(input, file$1, 34, 14, 1090);
     			attr_dev(div1, "class", "mb-3");
-    			add_location(div1, file$1, 15, 12, 624);
+    			add_location(div1, file$1, 33, 12, 1056);
     			attr_dev(button, "type", "submit");
     			attr_dev(button, "class", "btn btn-color px-5 mb-5 w-100 svelte-1di2fv1");
-    			add_location(button, file$1, 33, 14, 1185);
+    			add_location(button, file$1, 52, 14, 1652);
     			attr_dev(div2, "class", "text-center");
-    			add_location(div2, file$1, 32, 12, 1144);
+    			add_location(div2, file$1, 51, 12, 1611);
     			attr_dev(form, "class", "card-body cardbody-color p-lg-5 svelte-1di2fv1");
     			attr_dev(form, "action", "#/chat");
-    			add_location(form, file$1, 5, 10, 206);
+    			add_location(form, file$1, 24, 10, 640);
     			attr_dev(div3, "class", "card my-5");
-    			add_location(div3, file$1, 4, 8, 171);
+    			add_location(div3, file$1, 23, 8, 605);
     			attr_dev(div4, "class", "col-md-6 offset-md-3");
-    			add_location(div4, file$1, 2, 6, 54);
+    			add_location(div4, file$1, 21, 6, 488);
     			attr_dev(div5, "class", "row");
-    			add_location(div5, file$1, 1, 4, 29);
+    			add_location(div5, file$1, 20, 4, 463);
     			attr_dev(div6, "class", "container");
-    			add_location(div6, file$1, 0, 0, 0);
+    			add_location(div6, file$1, 19, 0, 434);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -6518,15 +6095,31 @@ var app = (function () {
     			append_dev(form, t0);
     			append_dev(form, div1);
     			append_dev(div1, input);
+    			set_input_value(input, /*user*/ ctx[0]);
     			append_dev(form, t1);
     			append_dev(form, div2);
     			append_dev(div2, button);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[2]),
+    					listen_dev(button, "click", /*doPost*/ ctx[1], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
     		},
-    		p: noop,
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*user*/ 1 && input.value !== /*user*/ ctx[0]) {
+    				set_input_value(input, /*user*/ ctx[0]);
+    			}
+    		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div6);
+    			mounted = false;
+    			run_all(dispose);
     		}
     	};
 
@@ -6541,16 +6134,46 @@ var app = (function () {
     	return block;
     }
 
-    function instance$1($$self, $$props) {
+    function instance$1($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Login', slots, []);
+    	const socket = lookup("http://localhost:8001");
+    	let user = '';
+    	let id = '';
+
+    	async function doPost() {
+    		await fetch('http://localhost:8001/v1/users', {
+    			method: 'POST',
+    			headers: { "Content-Type": "application/json" },
+    			body: JSON.stringify({ user, "socketId": id })
+    		});
+
+    		socket.emit('socketId', user);
+    	}
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Login> was created with unknown prop '${key}'`);
     	});
 
-    	return [];
+    	function input_input_handler() {
+    		user = this.value;
+    		$$invalidate(0, user);
+    	}
+
+    	$$self.$capture_state = () => ({ io: lookup, socket, user, id, doPost });
+
+    	$$self.$inject_state = $$props => {
+    		if ('user' in $$props) $$invalidate(0, user = $$props.user);
+    		if ('id' in $$props) id = $$props.id;
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [user, doPost, input_input_handler];
     }
 
     class Login extends SvelteComponentDev {

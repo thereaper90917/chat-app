@@ -1,3 +1,22 @@
+<script>
+  import io from 'socket.io-client'
+	const socket = io("http://localhost:8001")
+  let user = ''
+  let id = ''
+  async function doPost(){
+    const res = await fetch('http://localhost:8001/v1/users',{
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({"user":user, "socketId":id})
+    })
+    socket.emit('socketId',user)
+  }
+
+</script>
+
+
 <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3">
@@ -12,9 +31,9 @@
                 alt="profile"
               />
             </div>
-
             <div class="mb-3">
               <input
+              bind:value="{user}"
                 type="text"
                 class="form-control"
                 id="Username"
@@ -31,7 +50,7 @@
               />
             </div> -->
             <div class="text-center">
-              <button type="submit" class="btn btn-color px-5 mb-5 w-100">
+              <button type="submit" class="btn btn-color px-5 mb-5 w-100" on:click="{doPost}">
                 Login
               </button>
             </div>

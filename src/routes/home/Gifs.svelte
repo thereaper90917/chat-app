@@ -67,18 +67,19 @@
 <button class="btn btn-primary mt-2" on:click={searchForGif}>Search</button>
 <br>
 {#if singleGif}
-<img  id="search"src="{singleGif}" alt="..." class="img-thumbnail mt-2 mb-4" width="130px" height="140px" on:click="{(event)=> sendGif(event.target.getAttribute('src'))}">
+<img  id="search"src="{singleGif}" alt="..." class="img-thumbnail mt-2 mb-4" width="130px" height="140px" on:click="{(event)=> sendGif(event.target.getAttribute('src'), singleGif = '')}">
 <br>
 {/if}
 
 {#await promise}
     
 {:then}
-<p class="mt-3">Trending</p> 
-{#each gifs as gif, i }
-<img  id="{i}"src="{gif}" alt="..." class="img-thumbnail mt-1" width="130px" height="140px" on:click="{(event)=> sendGif(event.target.getAttribute('src'))}">
+<div class="container-sm"><p class="mt-3">Trending</p> 
+  {#each gifs as gif, i }
+  <img  id="{i}"src="{gif}" alt="..." class="img-thumbnail mt-1" width="130px" height="140px" on:click="{(event)=> sendGif(event.target.getAttribute('src'))}">
+  
+  {/each}
+  <p class="mt-1">Gifs Powered By GIPHY</p></div>
 
-{/each}
-<p class="mt-1">Gifs Powered By GIPHY</p>
 {/await}
 

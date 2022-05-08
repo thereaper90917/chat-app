@@ -23,6 +23,8 @@ socket.on('addUsers', (users)=>{
       </div> -->
     </div>
   </div>
+  <h2>Users Online: {allUsers.length}</h2>
+  <hr class="d-block d-lg-none mt-1 mb-0" />
  {#each allUsers as user}
  <a
  href="#"

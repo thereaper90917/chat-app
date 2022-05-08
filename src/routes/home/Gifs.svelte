@@ -67,7 +67,7 @@
 <button class="btn btn-primary mt-2" on:click={searchForGif}>Search</button>
 <br>
 {#if singleGif}
-<img  id="search"src="{singleGif}" alt="..." class="img-thumbnail mt-2 mb-4" width="130px" height="140px" on:click="{(event)=> sendGif(event.target.getAttribute('src'), singleGif = '')}">
+<img  id="search"src="{singleGif}" alt="..." class="img-thumbnail mt-2 mb-4" width="200px" height="200px" on:click="{(event)=> sendGif(event.target.getAttribute('src'), singleGif = '')}">
 <br>
 {/if}
 

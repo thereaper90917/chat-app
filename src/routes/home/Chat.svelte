@@ -61,19 +61,6 @@
       sendMessage();
     }
   }
-
-  function showEmojis (){
-    showEmoji = true
-  }
-  function showGifss(){
-    showGifs = true
-  }
-  function hideEmojis (){
-    showEmoji = false
-  }
-  function hideGifs(){
-    showGifs = false
-  }
 </script>
 
 <div class="col-12 col-lg-7 col-xl-9">
@@ -145,17 +132,15 @@
         bind:value={message}
       />
       <button class="btn btn-primary" on:click={sendMessage}>Send</button>
-      <button class="btn btn-primary" on:click={showGifss}>Gifs</button>
-      <button class="btn btn-primary" on:click={showEmojis}>Emoji</button>
+      <button class="btn btn-primary" on:click={()=> (showGifs === true) ? showGifs = false : showGifs = true}>Gifs</button>
+      <button class="btn btn-primary" on:click={()=> (showEmoji === true) ? showEmoji = false : showEmoji = true}>Emoji</button>
     </div>
     {#if  showGifs }
     <Gifs showGifs = {showGifs}/>
-    <button class="btn btn-primary" on:click={hideGifs}>Close</button>
     {/if}
     
     {#if showEmoji}
     <EmojiPicker bind:value={message} />
-    <button class="btn btn-primary" on:click={hideEmojis}>Close</button>
     {/if}
     
   </div>

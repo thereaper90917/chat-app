@@ -14,6 +14,9 @@
     function sendMessage(gif) {
    
    const sendMessage = {
+    data: {
+        timestamp: new Date().toISOString(),
+      },
      text: gif,
      user: {
        name: userName,
@@ -41,6 +44,7 @@
       let url = `https://api.giphy.com/v1/gifs/search?api_key=${API}&limit=1&q=${searchGif}`
       let res = await fetch(url)
       let result = await res.json()
+      console.log(result)
       let gif = result.data[0].images.downsized.url
       searchGif = ''
       singleGif = gif
